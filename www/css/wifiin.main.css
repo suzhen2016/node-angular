@@ -1,0 +1,19 @@
+
+.right{
+    float: right;
+    vertical-align: middle;
+    margin-top: -15px;
+}
+.main{
+    width:97%;
+}
+.page-header{
+    margin-top: 0;
+}
+
+.bottom{
+   margin-bottom: 40px;
+}
+#pages{
+    width:380px;
+}

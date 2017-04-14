@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html ng-app="myhome" ng-controller="mainController">
+<head >
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>VPN后台管理</title>
+    <!-- 框架的的css样式 -->
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/plugins/iCheck/custom.css" rel="stylesheet">
+
+    <!-- Sweet Alert -->
+    <link href="../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="css/pagination.css"/>-->
+    <link href="../css/style.css" rel="stylesheet">
+
+    <link href="../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <!-- Toastr style -->
+    <link href="../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+    <!-- 日历的样式表-->
+    <link href="../css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="../css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+    <!--select2-->
+    <link href="../css/plugins/select2/select2.min.css" rel="stylesheet">
+    <!-- css3动画与主样式 -->
+    <link href="../css/animate.css" rel="stylesheet">
+    <link  rel="stylesheet" type="text/css" href="../css/wifiin.main.css"/>
+    <!--本文件的添加的样式-->
+    <link href="../css/plugins/manage.css" rel="stylesheet">
+    <style>
+        @charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],
+        .ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}
+        ng\:form{display:block;}.ng-animate-start{clip:rect(0,auto,auto,0);
+                                    -ms-zoom:1.0001;}
+        .ng-animate-active{clip:rect(-1px,auto,auto,0);
+            -ms-zoom:1;}
+
+        .ibox-content.table thead tr th{
+            background-color: #ffffff;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body ng-class="{'mini-navbar':isBodyMin}">
+    <div id="wrapper" >
+        <!-- 左边导航栏选择菜单部分-->
+        <nav class="navbar-default navbar-static-side" role="navigation" >
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <span>
+                                <img alt="image" class="img-circle" src="../img/profile_small.jpg" />
+                            </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold">用户名:  {{username}}</strong>
+                                    </span>
+                                    <span class="text-muted text-xs block">
+                                        管理员<b class="caret"></b>
+                                    </span>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                               <li class="divider"></li>
+                                <li><a href="login.html">注销</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            IN+
+                        </div>
+                    </li>
+
+                    <li ng-repeat="i in items" ng-class='leftCn==i.cng ? "active":""' ng-click="change(i.cng)">
+                        <a ui-sref={{i.menu}}>
+                            <i class="fa {{i.class}}"></i>
+                            <span class="nav-label">
+                                {{i.name}}
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <!--嵌入试图的部分-->
+            <ui-view class="content">
+                <!--内容变化区域-->
+            </ui-view>
+
+        </div>
+
+    </div>
+    <!-- Mainly scripts -->
+    <script src="../js/jquery-2.1.1.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../js/angular.js"></script>
+
+    <script src="../js/angular-ui-router.js"></script>
+    <script src="main/app.js"></script>
+
+
+    <!--分页控制-->
+  <!--  <script src="js/pagination.js"></script>-->
+
+    <!-- Peity 图表-->
+    <!-- Custom and plugin javascript -->
+    <script src="../js/inspinia.js"></script>
+    <!-- 顶部的进度显示样式-->
+    <!--<script src="js/plugins/pace/pace.min.js"></script>-->
+
+    <!-- jQuery UI -->
+    <script src="../js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- Toastr 通知事项的插件 -->
+    <script src="../js/plugins/toastr/toastr.min.js"></script>
+
+    <!-- Clock picker 时间插件 -->
+    <!-- Data picker -->
+    <script src="../js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+    <!-- Date range picker -->
+    <!-- <script src="js/plugins/daterangepicker/daterangepicker.js"></script> -->
+
+    <!-- Date range use moment.js same as full calendar plugin -->
+     <script src="../js/plugins/fullcalendar/moment.min.js"></script>
+
+     <script src="../js/plugins/iCheck/icheck.min.js"></script>
+
+    <!-- Select2 -->
+    <script src="../js/plugins/select2/select2.full.min.js"></script>
+    <!-- TouchSpin -->
+    <script src="../js/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script>
+
+    <script type="text/javascript" src="../js/page.js"></script>
+
+    <script  type="text/javascript" src="../js/wifiin.main.js"></script>
+
+    <script  type="text/javascript" src="main/manage/appController.js"></script>
+    <script src="main/particulars/controller.js"></script>
+
+    <!-- Sweet alert -->
+    <script src="../js/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            /*1.欢迎登录的提示语配置，提示语配置*/
+            setTimeout(function() {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 2000
+                };
+                toastr.success('开发者账号', '欢迎来到VPN后台');
+            }, 1000);
+
+
+            //2.时间日历调用的
+            $('#data_1 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+            /*新增账号弹出框的有效期的下拉框*/
+           /* $(".select2_demo_3").select2({
+                placeholder: "Select a state",
+                allowClear: true
+            });*/
+
+
+            /*5.查询按钮的逻辑*/
+            $(".condition-box .btn-primary").click(findAjax);
+
+            /*3.模态框的逻辑处理*/
+            $(".newadd-user .confirm").click(newAjax);
+
+            /*4.续费的逻辑处理*/
+           $(".concat-time .btn-primary").click(concatAjax);
+
+           /*分页器的加载*/
+            /*createTable();*/
+            findAjax();
+
+        
+        });
+
+		/* 导出数据 */
+      $('.demoDc').click(function () {
+		    swal({
+		        title: "是否确定导出",
+		        text: '如果点击"确定"，该操作将不可恢复',
+		        type: "warning",
+		        showCancelButton: true,
+		        confirmButtonColor: "#DD6B55",
+		        confirmButtonText: "确定",
+		        closeOnConfirm: false
+		    });
+            $(".sa-button-container .cancel").html("取消");
+            $(".sa-button-container .confirm").after($(".sa-button-container .cancel"));
+            $('.sa-button-container .confirm').click(Eropt)
+		});
+
+       function Eropt(){
+        /*将form表单的值用name属性将其绑定，提交表单的时候后台可以提交到*/
+        $("form").submit();
+       }
+
+        /*获得查询条件*/
+        function getFindValue(){
+            var userName = $(".condition-box .form-control").eq(0).val();
+            var openTime = $(".condition-box .form-control").eq(1).val();
+            openTime = dateChange(openTime)
+            return {"userName":userName,"openTime":openTime};
+        }
+
+        function findAjax(){
+            var tdstr = gettableStr(jsonStr);
+            var trLstr = getLodaingStr();
+            $("#tbody").html(trLstr);
+            /************在拼接字符串完成后，给续费按钮绑定点击事件才有效********/
+            requestData(createTable);
+            /*回调函数的利用，在回调函数中执行ajax请求*/
+        }
+        function requestData(callback){
+            /*请求数据条件*/
+            var dataValue = getFindValue();
+
+            /*定时器缓加载*/
+           /* callback && callback(tdstr);*/
+            /*
+            $.ajax({
+                url:"",
+                type:"get",
+                data:dataValue,
+                dataType:"json",
+                success:function(data){
+                只需要在此做请求数据的处理即可，写成与假数据一致的格式
+                    callback(data);
+                }
+            });
+            */
+        }
+
+        /*分页器的制作*/
+        function createTable(){
+            /*为分页器样式做准备*/
+            var data = $("#pages").page(2,function(){
+                var result = [];
+                /*请求的数据*/
+                result = jsonStr;
+                return result;
+            }(),function(data, pagination){
+                /*拼接模板字符串*/
+                var dataHtml = "";
+                console.log(data)
+                dataHtml = gettableStr(data);
+                $("#editable").children("tbody").html(dataHtml);
+                $(".concat-time .btn-primary").click(concatAjax);
+            });
+        }
+
+        //是否为正整数判断
+        function isPositiveNum(s){
+            var re = /^([1-9]\d*|[0]{1,1})$/ ;
+            return re.test(s)
+        }
+
+        //是否为邮箱格式的判断
+        function isEmailName(emailName){
+            var re = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return re.test(emailName);
+        }
+
+        /*获得新增账户的条件*/
+
+        function getNewaddValue(){
+            var $emailName = $(".newadd-user .form-control").eq(0).val();
+            var $times = $(".newadd-user .form-control").eq(1).val();
+            /*检测数量条件是否为正整数*/
+            if(!$emailName){
+                $(".newadd-user .prompt-text").eq(0).text("未填写");
+                return false;
+            }else{
+                if(!isEmailName($emailName)){      //改
+                    $(".newadd-user .prompt-text").eq(0).text("格式有误");
+                    return false;
+                }else{
+                    $(".newadd-user .prompt-text").eq(0).text("");
+                
+                }
+            }
+            /*检测有效期的时间*/
+            if(!$times){
+                $(".newadd-user .prompt-text").eq(1).removeClass("hidden");
+                return false;
+            }else{
+                $(".newadd-user .prompt-text").eq(1).addClass("hidden");
+                saveDele();
+            }
+            return {"emailName":$emailName,"times":$times}
+
+        }
+
+        //检测用户所填的用户名是否已经存在数据中
+        function isExistEmailName(name){
+            var emailName=name;
+            $.ajax({
+                url:"",
+                type:"get",
+                data:{"e":emailName},
+                dataType:"json",
+                success:function(data){
+                   $("body").data(data);
+                }
+            });
+        }
+        //弹出框的函数；
+        function addMany(){
+            swal({
+                title: "已执行续费操作",
+                text: " "
+            });
+            $(".sa-button-container .confirm").text("确定");
+        }
+
+        function newAjax (){
+            var dataValue = getNewaddValue();
+                console.log(dataValue)
+            var obb = {};
+            obb.cc = dataValue.times;
+            console.log(obb);
+
+
+            console.log(dataValue.emailName);
+            isExistEmailName(name);
+            var dataVa =$("body").data();
+            if(false){
+                //存在就续费；
+               concatAjax(dataVa);
+               addMany();
+
+            }else{
+                //不存在就新建用户
+
+            }
+
+        }
+
+        /*获得续费的条件*/
+        function getConcattimeValue($dom){
+            var $promptText = $dom.find(".prompt-text");
+            var username =$dom.find(".form-control").eq(0).val();
+            var usertimes =$dom.find(".form-control").eq(1).val();
+            var newaddtime =$dom.find(".form-control").eq(2).val();
+            if(!newaddtime){
+                $promptText.removeClass("hidden");
+                return false;
+            }else{
+                $promptText.addClass("hidden");
+                saveDele();
+            }
+            return {"username":username,"usertimes":usertimes,"newaddtime":newaddtime}
+        }
+
+        function concatAjax(event,dataVa){
+           /* var $target = event.target;*/
+            var $concat = $(this).closest(".concat-time");
+            console.log(dataVa);
+            if(dataVa){
+                var dataValue = dataVa;
+            }else{
+                alert(2)
+                var dataValue = getConcattimeValue($concat);
+            }
+            /*alert(1)*/
+            $.ajax({
+                url:"",
+                type:"get",
+                data:dataValue,
+                dataType:"json",
+                success:function(data){
+                    console.log(data);
+                    /*确认按钮后的事件处理机制代码*/
+                }
+            })
+        }
+
+        /*确认操作后取消模态框*/
+        function saveDele(){
+            $(".inmodal").removeClass("in").css("display","none");
+            $("body").removeClass("modal-open");
+            $(".modal-backdrop").remove();
+        }
+
+        /*模拟获得到数据*/
+        var jsonStr =  [ {
+                "number": 1,
+                "username": "小候",
+                "mima":"242323",
+                "opentime": "2012/05/04",
+                "timelong": "2015/12/23",
+                "id": "myModa1"
+            },{
+                "number": 2,
+                "username": "小明",
+                "mima": "223z23",
+                "opentime": "2012/05/04",
+                "timelong": "2015/12/23",
+                "id": "myModa2"
+            },{
+                "number": 3,
+                "username": "小红",
+                "mima": "2frcd3",
+                "opentime": "2018/05/04",
+                "timelong": "2015/12/23",
+                "id": "myModa3"
+            },{
+                "number": 4,
+                "username": "小将",
+                "mima": 242323,
+                "opentime": "2012/05/04",
+                "timelong": "2015/12/23",
+                "id": "myModa4"
+            }
+        ];
+
+        /*数据拼接模板字符串*/
+        function gettableStr(s){
+            var ss = s;
+            var arr = [],
+                    len = ss.length;
+            for(var i= 0;i<len;i++){
+                var str = ss[i];
+                arr[arr.length]="<tr>";
+                arr[arr.length] =  `<td>${str.number}</td>
+                <td>${str.username}</td>
+                <td>${str.mima}</td>
+                <td>${str.opentime}</td>
+                <td>${str.timelong}</td>`;
+
+                arr[arr.length] =`<td>
+                <button class="concat-money" data-target="#${str.id}" data-toggle="modal">续费</button>
+                        <div class="modal inmodal" id="${str.id}" tabindex="-1" role="dialog"  aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content animated fadeIn">
+                        <div class="modal-header">
+                        <span class="text-left">账号续费</span>
+                        <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+                        </button>
+                        </div>
+                        <form action="#" class="concat-time">
+                        <div class="modal-body clearfix">
+
+                        <div class="form-group clearfix">
+                        <label class="col-sm-3 col-sm-3 control-label col-sm-offset-1">用户名</label>
+                        <div class="col-sm-5">
+                        <input type="text" class="form-control disabled" value="${str.username}" disabled placeholder="苏镇">
+                        </div>
+                        </div>
+                        <div class="form-group clearfix">
+                        <label class="col-sm-3 col-sm-3 control-label col-sm-offset-1">有效期</label>
+                        <div class="col-sm-5">
+                        <input type="text" class="form-control disabled" value="${str.timelong}" disabled placeholder="2016-09-30">
+                        </div>
+                        </div>
+                        <div class="form-group clearfix">
+                        <label class="col-sm-3 col-sm-3 control-label col-sm-offset-1">新增有效期</label>
+                        <div class="col-sm-5">
+                        <select class="select2_demo_3 form-control">
+                        <option value="">请选择</option>
+                        <option value="30">30天</option>
+                <option value="90">90天</option>
+                <option value="180">180天</option>
+                <option value="360">360天</option>
+                </select>
+                </div>
+                <div class="col-sm-3 prompt-text hidden">
+                        <span>此字段未选择</span>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">确定</button>
+                        <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                        </div>
+                        </form>
+                        </div>
+                        </div>
+                        </div>
+                        </td>
+            `;
+                arr[arr.length] = "</tr>";
+            }
+            return tdstr = arr.join("");
+        }
+
+        /*获得加载动画的字符串*/
+        function getLodaingStr(){
+            var tdlstr =   `
+                        <tr id="moban">
+                            <td colspan="6">
+                                <div class="ibox-content lading-init classNone">
+                                <div class="spiner-example">
+                                <div class="sk-spinner sk-spinner-three-bounce">
+                                <div class="sk-bounce1"></div>
+                                <div class="sk-bounce2"></div>
+                                <div class="sk-bounce3"></div>
+                                </div>
+                                </div>
+                                </div>
+                            </td>
+                        </tr>
+                `;
+            ;
+            return tdlstr;
+        }
+
+        /*日期时间的转换格式*/
+         function dateChange(data){
+             /*var date = data,dateStr = '',
+             dateStr =date.replace(/\//g,"-");
+             return dateStr;*/
+         }
+
+        //dateChange("2012/08/03");
+        /*var tdstr = gettableStr(jsonStr);*/
+       /* $("#moban").html(tdstr);*/
+        /*$("#tbody").html(tdstr);*/
+
+    </script>
+</body>
+</html>

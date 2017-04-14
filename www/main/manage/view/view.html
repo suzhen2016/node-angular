@@ -1,0 +1,257 @@
+
+<!-- 现收缩左边菜单栏的按钮部分-->
+<div class="row">
+	<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+		<div class="navbar-header">
+			<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " ng-click="changeBodyClass()"><i class="fa fa-bars"></i> </a>
+		</div>
+		<ul class="nav navbar-top-links flL">
+			<li>
+				<div class="col-lg-12">
+					<h2>VPN账号管理</h2>
+					<ol class="breadcrumb">
+						<li>
+							<a href="index.html">首页</a>
+						</li>
+						<li class="active">
+							<strong>VPN账号管理</strong>
+						</li>
+					</ol>
+				</div>
+			</li>
+		</ul>
+	</nav>
+</div>
+<!-- 主体的内容区域-->
+<div class="row white-bg dashboard-header" style="background: #f3f3f4">
+	<!--条件查找部分-->
+	<div class="condition-box">
+		<form role="form" action="#url">
+			<div class="form-group col-md-3 ">
+				<label>用户名</label>
+				<input type="txet" placeholder="用户名" ng-model='userName' name = "username" class="form-control">
+			</div>
+			<div class="form-group col-md-3 " id="data_1" >
+				<label>开通时间</label>
+				<div class="input-group date">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+					<input type="date" ng-model='time' class="form-control" placeholder="请选择" name = "findDate">
+				</div>
+			</div>
+			<div class="col-md-5 col-lg-3 btnBox">
+				<button type="button" class="btn btn-w-m btn-success demoDc">导出</button>
+				<button type="button" class="btn btn-w-m btn-primary"  ng-click="getShu()">查询</button>
+				<!-- 二次确认导出代码 -->
+				<!--管理模态框代码-->
+
+			</div>
+		</form>
+	</div>
+	<!--数据展示部分-->
+	<div class="table-box">
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+			</div>
+			<div class="ibox-content border4">
+				<!--新增账号按钮-->
+				<button type="button" class="btn newadd-btn btn-primary margin-bottom20" data-toggle="modal" data-target="#myModal4" >
+					<i class="fa fa-plus font-zi"></i>
+					新增账号
+				</button>
+				<!--新增账号弹出框-->
+				<div class="modal inmodal clearfix" id="myModal4" tabindex="-1" role="dialog"  aria-hidden="true" >
+					<div class="modal-dialog">
+						<div class="modal-content animated fadeIn">
+							<div class="modal-header">
+								<span class="text-left">新增账号</span>
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">&times;</span>
+									<span class="sr-only">Close</span>
+								</button>
+							</div>
+							<form action="#" class="newadd-user">
+								<div class="modal-body clearfix">
+									<div class="form-group clearfix">
+										<label class="col-sm-2 col-sm-2 control-label col-sm-offset-1">用户名</label>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" placeholder="请填写邮箱">
+										</div>
+										<div class="col-sm-4 prompt-text">
+											<span></span>
+										</div>
+									</div>
+									<div class="form-group clearfix">
+										<label class="col-sm-2 col-sm-2 control-label col-sm-offset-1">有效期</label>
+										<div class="col-sm-5">
+											<select class="select2_demo_3 form-control">
+												<option value="">请选择</option>
+												<option value="30">30天</option>
+												<option value="90">90天</option>
+												<option value="180">180天</option>
+												<option value="360">360天</option>
+											</select>
+										</div>
+										<div class="col-sm-4 prompt-text hidden">
+											<span>此字段未选择</span>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary confirm" id="domNew">确定</button>
+									<button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+								</div>
+							</form>
+
+						</div>
+					</div>
+				</div>
+				<!--数据表格-->
+				<table class="table table-striped table-bordered table-hover dataTables-example" id="editable" >
+					<thead>
+					<tr>
+						<th>序号</th>
+						<th>用户名</th>
+						<th>密码</th>
+						<th>开通时间</th>
+						<th>有限期至</th>
+						<th>操作</th>
+					</tr>
+					</thead>
+					<tbody id="tbody">
+					<tr>
+						<td>1</td>
+						<td>苏镇</td>
+						<td>13641273262</td>
+						<td>2016-08-14 12：30</td>
+						<td>2016-09-14 12：30</td>
+						<td><button class="concat-money" data-target="#myModal" data-toggle="modal">续费</button>
+							<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content animated fadeIn">
+										<div class="modal-header">
+											<span class="text-left">账号续费</span>
+											<button type="button" class="close" data-dismiss="modal">
+												<span aria-hidden="true">&times;</span>
+												<span class="sr-only">Close</span>
+											</button>
+										</div>
+										<form action="#" class="concat-time">
+											<div class="modal-body clearfix">
+
+												<div class="form-group clearfix">
+													<label class="col-sm-3 col-sm-3 control-label col-sm-offset-1">用户名</label>
+													<div class="col-sm-5">
+														<input type="text" class="form-control disabled" value="苏镇" disabled placeholder="苏镇">
+													</div>
+												</div>
+												<div class="form-group clearfix">
+													<label class="col-sm-3 col-sm-3 control-label col-sm-offset-1">有效期</label>
+													<div class="col-sm-5">
+														<input type="text" class="form-control disabled" value="2016-09-30" disabled placeholder="2016-09-30">
+													</div>
+												</div>
+												<div class="form-group clearfix">
+													<label class="col-sm-3 col-sm-3 control-label col-sm-offset-1">新增有效期</label>
+													<div class="col-sm-5">
+														<select class="select2_demo_3 form-control">
+															<option value="">请选择</option>
+															<option value="30">30天</option>
+															<option value="90">90天</option>
+															<option value="180">180天</option>
+															<option value="360">360天</option>
+														</select>
+													</div>
+													<div class="col-sm-3 prompt-text hidden">
+														<span>此字段未选择</span>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-primary">确定</button>
+												<button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><button class="concat-money" data-target="#myModal6" data-toggle="modal">续费</button>
+							<div class="modal inmodal" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content animated fadeIn">
+										<div class="modal-header">
+											<span class="text-left">账号续费</span>
+											<button type="button" class="close" data-dismiss="modal">
+												<span aria-hidden="true">&times;</span>
+												<span class="sr-only">Close</span>
+											</button>
+										</div>
+										<form action="#" class="concat-time">
+											<div class="modal-body clearfix">
+
+												<div class="form-group clearfix">
+													<label class="col-sm-3 col-sm-3 control-label col-sm-offset-1">用户名</label>
+													<div class="col-sm-5">
+														<input type="text" class="form-control disabled" value="苏镇" disabled placeholder="苏镇">
+													</div>
+												</div>
+												<div class="form-group clearfix">
+													<label class="col-sm-3 col-sm-3 control-label col-sm-offset-1">有效期</label>
+													<div class="col-sm-5">
+														<input type="text" class="form-control disabled" value="2016-09-30" disabled placeholder="2016-09-30">
+													</div>
+												</div>
+												<div class="form-group clearfix">
+													<label class="col-sm-3 col-sm-3 control-label col-sm-offset-1">新增有效期</label>
+													<div class="col-sm-5">
+														<select class="select2_demo_3 form-control">
+															<option value="">请选择</option>
+															<option value="30">30天</option>
+															<option value="90">90天</option>
+															<option value="180">180天</option>
+															<option value="360">360天</option>
+														</select>
+													</div>
+													<div class="col-sm-3 prompt-text hidden">
+														<span>未选择</span>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-primary" onclick="concatAjax()">确定</button>
+												<button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<div id="pages" class="paginationjs-theme-blue paginationjs-big"></div>
+				<p>
+
+				</p>
+				<!--加载动画的部分-->
+			</div>
+		</div>
+	</div>
+	<div>
+		<!--底部的部分-->
+		<div class="footer">
+			<div>
+				<strong>Copyright</strong> Example Company &copy; 2014-2015
+			</div>
+		</div>
+	</div>
+</div>

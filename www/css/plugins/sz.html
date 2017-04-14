@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>bootstrap源码css样式</title>
+    <link rel="stylesheet" type="text/css" href="../bootstrap.min.css">
+    <style>
+       input[type="number"]::-webkit-inner-spin-button,
+       input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none !important;
+            margin: 0;
+       }
+       @media (min-width: 768px) {
+          div {
+            padding-top: 7px;
+            margin-bottom: 0;
+        
+            
+          }
+        }
+        .box {
+            width: 200px;
+            height: 200px;
+            border:1px solid blue;
+            padding: 10px;
+            background-color: rgba(100,100,100,0.2);
+            /* opacity: 0.2; */
+        }
+        p:first-letter {
+            font:600 20px "Microsoft YaHei";
+            color: yellow;
+            
+        
+        }
+        p{
+            text-indent: 40px;
+        }
+        p::selection {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <table class="table table-bordered table-striped table-hover "> 
+            <caption>高中</caption>
+            <thead class="text-center">
+                <tr><th>班级</th><th>姓名</th><th></th></tr>
+            </thead>
+            <tbody class="text-center">
+                <tr>
+                    <td>一年级</td>
+                    <td>王清海</td>
+                </tr>
+                  <tr>
+                    <td>一年级</td>
+                    <td>王清海</td>
+                </tr>
+                  <tr>
+                    <td>一年级</td>
+                    <td>王清海qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq</td>
+                </tr>
+                <tr>
+                    <td>一年级</td>
+                    <td>王清海</td>
+                </tr>
+                  <tr>
+                    <td>一年级</td>
+                    <td>王清海</td>
+                </tr>
+                  <tr>
+                    <td>一年级</td>
+                    <td>王清海</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        数字：<input type="number" max-length="3">
+        多选：<input class="checkbox-inline" type="checkbox" value="篮球"> 篮球
+              <input type="checkbox" value="足球"> 足球  
+               <input type="radio" disabled value="足球"> 足球 
+    </div>
+    <div class="box">
+        <p class="span">书真的获得事件打开自己,制作即可的即可将触手可及参考着基础课程苍井空苍井空从进口车</p>
+    </div>
+    <div class="btn-group">
+        <button class="btn">我的</button>
+        <button class="btn">自己</button>
+        <button class="btn">在中国</button>
+        <button class="btn">自己</button>
+        <button class="btn">自己</button>
+        <button class="btn">自己自己</button>
+
+    </div>
+
+
+</body>
+</html>
